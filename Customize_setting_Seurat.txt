@@ -1,0 +1,7 @@
+# Load the ChronicARTNeg_Proj dataset
+ChronicARTNeg_Proj.data <- Read10X(data.dir = main_data_directory)
+# Initialize the Seurat object with the raw (non-normalized data).
+ChronicARTNeg_Proj <- CreateSeuratObject(counts = ChronicARTNeg_Proj.data, project = "ChronicARTNeg_Proj", min.cells = 3, min.features = 200)
+## indorder to filter the data based on nFeature_RNA and percent.mt, following settings were used
+ChronicARTNeg_Proj <- subset(ChronicARTNeg_Proj, subset = nFeature_RNA > 200 & nFeature_RNA < 6000 & percent.mt < 20)
+# We included up to 45 dimensions for down streaming analysis. We decided this cut-off value based on the Jackstraw and Elbowplot. Beside these settings we used the defaults settings from Seurat package.
